@@ -1,0 +1,164 @@
+<html>
+  <head>
+    <title>cat</title>
+    <meta charset="utf-8" />
+    <script src="https://unpkg.com/three@0.137.4/build/three.min.js"></script>
+    <script src="https://unpkg.com/three@0.137.4/examples/js/controls/OrbitControls.js"></script>
+  </head>
+<body>
+ <script>
+   
+      //　ページの読み込みを待つ
+      window.addEventListener('DOMContentLoaded', init);
+
+      function init() {
+        
+        //　サイズを指定
+        const width = 800
+        const height = 600;
+
+        //　レンダラーを作成
+        var renderer = new THREE.WebGLRenderer();
+        document.body.appendChild(renderer.domElement);
+        renderer.setSize(width, height);
+
+        //　シーンを作成
+        const scene = new THREE.Scene();
+
+        //　カメラを作成
+        const camera = new THREE.PerspectiveCamera(45, width / height);
+        
+        //　カメラの初期座標を設定
+        camera.position.set(0, 0, 10);
+
+        //　カメラコントローラーを作成
+        const controls = new THREE.OrbitControls(camera, document.body); 
+        
+        //　平行光源1
+        var directionalLight1 = new THREE.DirectionalLight(0xffffff);
+        directionalLight1.position.set(10, 10, 10);
+        
+        //　シーンに追加
+        scene.add(directionalLight1);
+        
+        //　平行光源2
+        var directionalLight2 = new THREE.DirectionalLight(0x888888);
+        directionalLight2.position.set(-10, -10, 10);
+        
+        //　シーンに追加
+        scene.add(directionalLight2);
+
+        // 平面を作成
+        var planeGeometry = new THREE.PlaneGeometry(5,5,10,10);//　縦、横、分割数、分割数
+        var planeMaterial = new THREE.MeshBasicMaterial({color: 0x00ff00});
+        var plane = new THREE.Mesh(planeGeometry,planeMaterial);
+        plane.rotation.set( -Math.PI/2, 0, 0 );
+        plane.position.set(0,0,0);
+        scene.add(plane);
+
+        //　マテリアルの設定
+        var material = new THREE.MeshLambertMaterial({ color: 0xE3E339 });
+
+        //　頭を作成
+        var head_g = new THREE.SphereGeometry( 1, 32, 32 );
+        var head = new THREE.Mesh(head_g, material);
+        head.position.set(0,1,0);//　allの中心が原点になる
+
+        //　右耳を作成
+        var ear_g = new THREE.ConeGeometry( 0.4, 0.6, 32 );
+        var r_ear = new THREE.Mesh(ear_g, material);
+        r_ear.rotation.z = 0.7;
+        r_ear.position.set(-0.7,1.9,0);
+
+        //　左耳を作成
+        var l_ear = new THREE.Mesh(ear_g, material);
+        l_ear.rotation.z = -0.7;
+        l_ear.position.set(0.7,1.9,0);
+
+        //　右目を作成
+        var eye_g = new THREE.SphereGeometry( 0.15, 32, 32 );
+        var material_eye = new THREE.MeshLambertMaterial({ color: 0x000000 });
+        var r_eye = new THREE.Mesh( eye_g, material_eye);
+        r_eye.position.set(-0.3,1.3,0.8);
+
+        //　左目を作成
+        var l_eye = new THREE.Mesh( eye_g, material_eye);
+        l_eye.position.set(0.3,1.3,0.8);
+
+        //　鼻を作成
+        var nose_g = new THREE.SphereGeometry( 0.1, 32, 32 );
+        var material_nose = new THREE.MeshLambertMaterial({ color: 0x6A3300 });
+        var nose = new THREE.Mesh( eye_g, material_nose);
+        nose.position.set(0,1,0.9);
+
+        //　口を作成
+        var mouth_g = new THREE.CylinderGeometry( 0.2, 0.2, 0.48, 3 );
+        var material_mouth = new THREE.MeshLambertMaterial( {color: 0xF067A6} );
+        var mouth = new THREE.Mesh( mouth_g, material_mouth );
+        mouth.rotation.x = 2;
+        mouth.position.set( 0, 0.7, 0.7 );
+
+        //　右ひげ1,2,3を作成
+        var beard_g = new THREE.CylinderGeometry( 0.01, 0.01, 0.7, 32);
+        var material_beard = new THREE.MeshLambertMaterial( {color: 0x000000} );
+        var beard1 = new THREE.Mesh( beard_g, material_beard );
+        var beard2 = new THREE.Mesh( beard_g, material_beard );
+        var beard3 = new THREE.Mesh( beard_g, material_beard );
+        beard1.rotation.z = 1.7;
+        beard1.position.set( 0.6, 1.1, 0.9);
+        beard2.rotation.z = 1.57;
+        beard2.position.set( 0.6, 0.9, 0.9);
+        beard3.rotation.z = 1.44;
+        beard3.position.set( 0.6, 0.7, 0.85);
+
+        //　左ひげ1,2,3を作成
+        var beard4 = new THREE.Mesh( beard_g, material_beard );
+        var beard5 = new THREE.Mesh( beard_g, material_beard );
+        var beard6 = new THREE.Mesh( beard_g, material_beard );
+        beard4.rotation.z = -1.7;
+        beard4.position.set( -0.6, 1.1, 0.9);
+        beard5.rotation.z = -1.57;
+        beard5.position.set( -0.6, 0.9, 0.9);
+        beard6.rotation.z = -1.44;
+        beard6.position.set( -0.6, 0.7, 0.85);
+
+        //　猫のオブジェクト
+        const cat = new THREE.Group();
+        cat.add(head);//　頭を追加
+        cat.add(r_ear);//　右耳を追加
+        cat.add(l_ear);//　左耳を追加
+        cat.add(r_eye);//　右目を追加
+        cat.add(l_eye);//　左目を追加
+        cat.add(nose);//　鼻を追加
+        cat.add(mouth);//　口を追加
+        cat.add(beard1);//　右ひげ1を追加
+        cat.add(beard2);//　右ひげ2を追加
+        cat.add(beard3);//　右ひげ3を追加
+        cat.add(beard4);//　左ひげ1を追加
+        cat.add(beard5);//　左ひげ2を追加
+        cat.add(beard6);//　左ひげ3を追加
+        scene.add(cat);
+
+        //　全体のオブジェクト
+        const all = new THREE.Group();
+        all.add(plane);//　平面を追加
+        all.add(cat);//　猫を追加
+        scene.add(all); 
+
+        update();
+
+        //　毎フレーム時に実行されるループイベントです
+        function update() {
+          
+          //　レンダリング
+          renderer.render(scene, camera);
+          requestAnimationFrame(update);
+
+          //　猫を回転させる
+          cat.rotation.y += 0.005;;
+          
+        }
+      }
+    </script>
+</body>
+</html>
