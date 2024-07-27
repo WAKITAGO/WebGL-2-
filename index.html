@@ -106,7 +106,6 @@
           var textureLoader = new THREE.TextureLoader();  
           var star_t = textureLoader.load("star.png");
           const star_m = new THREE.SpriteMaterial({ map: star_t,});
-          });
 
           // 形状とマテリアルからメッシュを作成
           const star = new THREE.Points(star_g, star_m);
