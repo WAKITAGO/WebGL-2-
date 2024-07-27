@@ -84,6 +84,37 @@
           scene.add(starfield);
         }
 
+        // 星を作成
+        createstar();
+        
+        function createstar() {
+          // 頂点情報
+          const vertices = [];
+          for (let i = 0; i < 20; i++) {
+            const x = 1000 * (Math.random() - 0.5);
+            const y = 1000 * (Math.random() - 0.5);
+            const z = 1000 * (Math.random() - 0.5);
+
+            vertices.push(x, y, z);
+          }
+
+          // 星を作成
+          const star_g = new THREE.BufferGeometry();
+          star_g.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+
+          // マテリアルを作成
+          var textureLoader = new THREE.TextureLoader();  
+          var star_t = textureLoader.load("star.png");
+          const star_m = new THREE.SpriteMaterial({ map: star_t,});
+          });
+
+          // 形状とマテリアルからメッシュを作成
+          const star = new THREE.Points(star_g, star_m);
+          star.scale.set(50,50,50);
+          // 星を追加
+          scene.add(star);
+        }
+
         // 太陽をスプライトで作成
         var textureLoader = new THREE.TextureLoader();  
         var sun_t = textureLoader.load("sun.png");
@@ -95,7 +126,7 @@
         scene.add(sun);
 
         // 星をスプライトで10個作成
-        var textureLoader = new THREE.TextureLoader();  
+        /*var textureLoader = new THREE.TextureLoader();  
         var star_t = textureLoader.load("star.png");
         const star_m = new THREE.SpriteMaterial({ map: star_t,});
 
@@ -152,7 +183,7 @@
         const star11 = new THREE.Sprite(star_m);
         star11.position.set(200,-300,300);
         star11.scale.set(50,50,50);
-        scene.add(star11);
+        scene.add(star11);*/
 
         update();
 
