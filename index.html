@@ -154,7 +154,10 @@
         scene.add(star11);
 
         //ロケットの頭
-        
+        var head_g = new THREE.ConeGeometry( 50, 50, 32 );
+        var head_m = new THREE.MeshLambertMaterial( {color: 0xFF0000} );
+        var head = new THREE.Mesh(head_g, head_m);
+        head.position.set( 500, 225, 0);
         
         //ロケットの胴体
         var body_g = new THREE.CylinderGeometry( 50, 50, 200, 32);
