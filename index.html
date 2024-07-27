@@ -42,24 +42,23 @@
         scene.add(directionalLight);
 
         // マテリアルを作成
-        const material = new THREE.MeshStandardMaterial({
+        const earth_m = new THREE.MeshStandardMaterial({
           map: new THREE.TextureLoader().load('earth.png'),
           side: THREE.DoubleSide,
         });
 
-        // 球体の形状を作成します
-        const geometry = new THREE.SphereGeometry(200, 32, 32);
-        // 形状とマテリアルからメッシュを作成します
-        const earthMesh = new THREE.Mesh(geometry, material);
-        // シーンにメッシュを追加します
-        scene.add(earthMesh);
+        // 地球を作成
+        const earth_g = new THREE.SphereGeometry(200, 32, 32);
+        // 形状とマテリアルからメッシュを作成
+        const earth = new THREE.Mesh(earth_g, earth_m);
+        // シーンに地球を追加
+        scene.add(earth);
 
-        // 星屑を作成します (カメラの動きをわかりやすくするため)
+        // 星屑を作成
         createStarField();
-
-        /** 星屑を作成します */
+        
         function createStarField() {
-          // 頂点情報を作詞絵
+          // 頂点情報
           const vertices = [];
           for (let i = 0; i < 1000; i++) {
             const x = 3000 * (Math.random() - 0.5);
@@ -69,24 +68,25 @@
             vertices.push(x, y, z);
           }
 
-          // 形状データを作成
-          const geometry = new THREE.BufferGeometry();
-          geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+          // 星屑を作成
+          const starfield_g = new THREE.BufferGeometry();
+          starfield_g.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
 
           // マテリアルを作成
-          const material = new THREE.PointsMaterial({
+          const starfield_m = new THREE.PointsMaterial({
             size: 10,
             color: 0xffffff,
           });
 
-          // 物体を作成
-          const mesh = new THREE.Points(geometry, material);
-          scene.add(mesh);
+          // 形状とマテリアルからメッシュを作成
+          const starfield = new THREE.Points(starfield_g, starfield_m);
+          // 星屑を追加
+          scene.add(starfield);
         }
 
         update();
 
-        // 毎フレーム時に実行されるループイベントです
+        // 毎フレーム時に実行されるループイベント
         function update() {
           // レンダリング
           renderer.render(scene, camera);
@@ -94,11 +94,8 @@
 
 
           // 地球を回転させる
-          earthMesh.rotation.y += 0.005;;
-
-          // 全体を回転させる
-          //all.rotation.x += 0.01;
-          //all.rotation.y += 0.005;;
+          earth.rotation.y += 0.005;;
+          
         }
       }
     </script>
