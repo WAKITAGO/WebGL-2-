@@ -84,7 +84,17 @@
           scene.add(starfield);
         }
 
-        // 星をスプライトで作成
+        // 太陽をスプライトで作成
+        var textureLoader = new THREE.TextureLoader();  
+        var sun_t = textureLoader.load("sun.png");
+        const sun_m = new THREE.SpriteMaterial({ map: sun_t,});
+
+        const sun = new THREE.Sprite(sun_m);
+        sun.position.set(300,300,0);
+        sun.scale.set(150,150,150);
+        scene.add(sun);
+
+        // 星をスプライトで10個作成
         var textureLoader = new THREE.TextureLoader();  
         var star_t = textureLoader.load("star.png");
         const star_m = new THREE.SpriteMaterial({ map: star_t,});
