@@ -180,6 +180,11 @@
         wing.position.set( 500, 80, 0 );
         
         //ロケットのエンジン
+        var engine_g = new THREE.ConeGeometry( 75, 50, 32 );
+        var engine_m = new THREE.MeshLambertMaterial( {color: 0x4D4D4F} );
+        var engine = new THREE.Mesh(engine_g, engine_m);
+        engine.position.set( 500, 10, 0);
+        
         //ロケットの火
 
         const rocket = new THREE.Group();
@@ -187,6 +192,7 @@
         rocket.add(body);//　胴体を追加
         rocket.add(wing);//　羽を追加
         rocket.add(window);//　窓を追加
+        rocket.add(engine);//　エンジンを追加
         scene.add(rocket);
 
         update();
