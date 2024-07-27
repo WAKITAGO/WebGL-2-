@@ -183,7 +183,8 @@
         //ロケットの火
 
         const rocket = new THREE.Group();
-        rocket.add(body);//　頭を追加
+        rocket.add(head);//　頭を追加
+        rocket.add(body);//　胴体を追加
         rocket.add(wing);//　羽を追加
         rocket.add(window);//　窓を追加
         scene.add(rocket);
