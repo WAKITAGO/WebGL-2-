@@ -84,6 +84,18 @@
           scene.add(starfield);
         }
 
+        // 星をスプライトで作成
+        var textureLoader = new THREE.TextureLoader();  
+        var star_t = textureLoader.load("star.png");
+        const star_m = new THREE.SpriteMaterial({ map: star_t,});
+
+        const star1 = new THREE.Sprite(star_m);
+        star1.position.x = 300;
+        star1.position.y = 300;
+        star1.position.z = 300;
+        star1.scale.set(100,100,100);
+        scene.add(star1);
+
         update();
 
         // 毎フレーム時に実行されるループイベント
