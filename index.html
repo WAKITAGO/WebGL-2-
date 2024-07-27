@@ -4,6 +4,7 @@
     <title>隕石</title>
     <meta charset="utf-8" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r127/three.min.js"></script>
+    <script src="https://unpkg.com/three@0.137.4/examples/js/controls/OrbitControls.js"></script>
     <script>
       // ページの読み込みを待つ
       window.addEventListener('load', init);
@@ -29,6 +30,11 @@
 
         // カメラを作成
         const camera = new THREE.PerspectiveCamera(45, width / height);
+        // カメラの初期座標を設定
+        camera.position.set(0, 0, 500);
+
+        // カメラコントローラーを作成
+        const controls = new THREE.OrbitControls(camera, document.body);
 
         // 平行光源を作成
         const directionalLight = new THREE.DirectionalLight(0xffffff);
@@ -78,23 +84,21 @@
           scene.add(mesh);
         }
 
-        tick();
+        update();
 
         // 毎フレーム時に実行されるループイベントです
-        function tick() {
-          //rot += 0.5; // 毎フレーム角度を0.5度ずつ足していく
-          // ラジアンに変換する
-          //const radian = (rot * Math.PI) / 180;
-          // 角度に応じてカメラの位置を設定
-          //camera.position.x = 1000 * Math.sin(radian);
-          //camera.position.z = 1000 * Math.cos(radian);
-          // 原点方向を見つめる
-          camera.lookAt(new THREE.Vector3(0, 0, 0));
-
+        function update() {
           // レンダリング
           renderer.render(scene, camera);
+          requestAnimationFrame(update);
 
-          requestAnimationFrame(tick);
+
+          // ペンギンを回転させる
+          //pengin.rotation.y += 0.005;;
+
+          // 全体を回転させる
+          //all.rotation.x += 0.01;
+          //all.rotation.y += 0.005;;
         }
       }
     </script>
