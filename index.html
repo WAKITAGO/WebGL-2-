@@ -163,11 +163,11 @@
         body.position.set( 500, 100, 0);
         
         //ロケットの窓
-        var window_g = new THREE.CylinderGeometry( 25, 25, 105, 32);
+        var window_g = new THREE.CylinderGeometry( 25, 25, 102.5, 32);
         var window_m = new THREE.MeshLambertMaterial( {color: 0xADE0EE} );
         var window = new THREE.Mesh( window_g, window_m );
         window.rotation.x = -1.57;
-        window.position.set( 500, 100, 0);
+        window.position.set( 500, 110, 0);
         
         //ロケットの羽
         var wing_g = new THREE.CylinderGeometry( 120, 120, 10, 3 );
