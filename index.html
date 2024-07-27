@@ -153,6 +153,24 @@
         star11.scale.set(50,50,50);
         scene.add(star11);
 
+        //ロケットの頭
+        
+        
+        //ロケットの胴体
+        var body_g = new THREE.CylinderGeometry( 50, 50, 200, 32);
+        var body_m = new THREE.MeshLambertMaterial( {color: 0xC9CACA} );
+        var body = new THREE.Mesh( body_g, body_m );
+        body.position.set( 500, 100, 0);
+        
+        //ロケットの窓
+        //ロケットの羽
+        //ロケットのエンジン
+        //ロケットの火
+
+        const rocket = new THREE.Group();
+        rocket.add(body);//　頭を追加
+        scene.add(rocket);
+
         update();
 
         // 毎フレーム時に実行されるループイベント
