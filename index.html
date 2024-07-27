@@ -49,18 +49,18 @@
         scene.add(directionalLight2);
 
         // 平面を作成
-        var planeGeometry = new THREE.PlaneGeometry(5,5,10,10);//　縦、横、分割数、分割数
+        /*var planeGeometry = new THREE.PlaneGeometry(5,5,10,10);//　縦、横、分割数、分割数
         var planeMaterial = new THREE.MeshBasicMaterial({color: 0x00ff00});
         var plane = new THREE.Mesh(planeGeometry,planeMaterial);
         plane.rotation.set( -Math.PI/2, 0, 0 );
         plane.position.set(0,0,0);
-        scene.add(plane);
+        scene.add(plane);*/
 
         //　マテリアルの設定
         var material = new THREE.MeshLambertMaterial({ color: 0xE3E339 });
 
         //　頭を作成
-        var head_g = new THREE.SphereGeometry( 1, 32, 32 );
+        /*var head_g = new THREE.SphereGeometry( 1, 32, 32 );
         var head = new THREE.Mesh(head_g, material);
         head.position.set(0,1,0);//　allの中心が原点になる
 
@@ -137,12 +137,12 @@
         cat.add(beard4);//　左ひげ1を追加
         cat.add(beard5);//　左ひげ2を追加
         cat.add(beard6);//　左ひげ3を追加
-        scene.add(cat);
+        scene.add(cat);*/
 
         //　全体のオブジェクト
         const all = new THREE.Group();
-        all.add(plane);//　平面を追加
-        all.add(cat);//　猫を追加
+        //all.add(plane);//　平面を追加
+        //all.add(cat);//　猫を追加
         scene.add(all); 
 
         update();
@@ -155,7 +155,7 @@
           requestAnimationFrame(update);
 
           //　猫を回転させる
-          cat.rotation.y += 0.005;;
+          //cat.rotation.y += 0.005;;
           
         }
       }
