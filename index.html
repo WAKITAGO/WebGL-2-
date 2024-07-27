@@ -186,6 +186,11 @@
         engine.position.set( 500, 10, 0);
         
         //ロケットの火
+        var fire_g = new THREE.SphereGeometry( 30, 32, 32 );
+        var fire_m = new THREE.MeshLambertMaterial( {color: 0x4D4D4F} );
+        var fire = new THREE.Mesh( fire_g, fire_m);
+        fire.scale.y =1.5;
+        fire.position.set(500,0,0);
 
         const rocket = new THREE.Group();
         rocket.add(head);//　頭を追加
@@ -193,6 +198,7 @@
         rocket.add(wing);//　羽を追加
         rocket.add(window);//　窓を追加
         rocket.add(engine);//　エンジンを追加
+        rocket.add(fire);//　火を追加
         scene.add(rocket);
 
         update();
