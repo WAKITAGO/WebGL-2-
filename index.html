@@ -65,6 +65,19 @@
         //　マテリアルの設定
         var material = new THREE.MeshLambertMaterial({ color: 0xE3E339 });
 
+        // マテリアルを作成
+        const material = new THREE.MeshStandardMaterial({
+          map: new THREE.TextureLoader().load('earth.png'),
+          side: THREE.DoubleSide,
+        });
+
+        // 球体の形状を作成します
+        const geometry = new THREE.SphereGeometry(300, 30, 30);
+        // 形状とマテリアルからメッシュを作成します
+        const earthMesh = new THREE.Mesh(geometry, material);
+        // シーンにメッシュを追加します
+        scene.add(earthMesh);
+
         //　頭を作成
         /*var head_g = new THREE.SphereGeometry( 1, 32, 32 );
         var head = new THREE.Mesh(head_g, material);
